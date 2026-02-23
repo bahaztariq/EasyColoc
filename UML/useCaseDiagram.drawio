@@ -13,6 +13,9 @@
                 <mxCell id="66" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="16" target="25">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
+                <mxCell id="68" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="16" target="22">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
                 <mxCell id="16" value="Member" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;" vertex="1" parent="1">
                     <mxGeometry x="80" y="200" width="30" height="60" as="geometry"/>
                 </mxCell>
@@ -80,40 +83,40 @@
                     <mxGeometry x="865" y="130" width="150" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="60" value="" style="swimlane;startSize=0;" vertex="1" parent="1">
-                    <mxGeometry x="230" y="-60" width="590" height="940" as="geometry"/>
+                    <mxGeometry x="230" y="-110" width="620" height="990" as="geometry"/>
                 </mxCell>
                 <mxCell id="61" value="EasyColoc" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="60">
                     <mxGeometry x="250" width="80" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="33" value="Invite Members" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffffff;" vertex="1" parent="60">
-                    <mxGeometry x="35" y="530" width="160" height="40" as="geometry"/>
+                    <mxGeometry x="35" y="590" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="34" value="Remove Member" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffffff;" vertex="1" parent="60">
-                    <mxGeometry x="35" y="580" width="160" height="40" as="geometry"/>
+                    <mxGeometry x="35" y="640" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="35" value="Manage Categories" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffffff;" vertex="1" parent="60">
-                    <mxGeometry x="35" y="630" width="160" height="40" as="geometry"/>
+                    <mxGeometry x="35" y="690" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="36" value="Cancel Colocation" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffffff;" vertex="1" parent="60">
-                    <mxGeometry x="35" y="680" width="160" height="40" as="geometry"/>
+                    <mxGeometry x="35" y="740" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="32" value="Create Colocation" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffffff;" vertex="1" parent="60">
-                    <mxGeometry x="35" y="480" width="160" height="40" as="geometry"/>
+                    <mxGeometry x="35" y="540" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="30" value="Leave Colocation" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffffff;" vertex="1" parent="60">
                     <mxGeometry x="35" y="370" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="38" value="View Global Statistics" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffffff;" vertex="1" parent="60">
-                    <mxGeometry x="35" y="730" width="160" height="40" as="geometry"/>
+                    <mxGeometry x="35" y="790" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="39" value="Ban User" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffffff;" vertex="1" parent="60">
-                    <mxGeometry x="35" y="780" width="160" height="40" as="geometry"/>
+                    <mxGeometry x="35" y="840" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="40" value="Unban User" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffffff;" vertex="1" parent="60">
-                    <mxGeometry x="35" y="830" width="160" height="40" as="geometry"/>
+                    <mxGeometry x="35" y="890" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="41" value="View Banned Users" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffffff;" vertex="1" parent="60">
-                    <mxGeometry x="35" y="880" width="160" height="40" as="geometry"/>
+                    <mxGeometry x="35" y="940" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="29" value="Mark Payment as Paid" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffffff;" vertex="1" parent="60">
                     <mxGeometry x="40" y="310" width="160" height="40" as="geometry"/>
@@ -137,10 +140,10 @@
                     <mxGeometry x="35" y="420" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="22" value="Manage Profile" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffffff;" vertex="1" parent="60">
-                    <mxGeometry x="205" y="190" width="160" height="40" as="geometry"/>
+                    <mxGeometry x="35" y="480" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="21" value="Register / Login" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffffff;" vertex="1" parent="60">
-                    <mxGeometry x="300" y="270" width="160" height="40" as="geometry"/>
+                    <mxGeometry x="310" y="240" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="55" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;rounded=0;startArrow=none;startFill=0;endFill=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="60" source="23" target="21">
                     <mxGeometry relative="1" as="geometry"/>
