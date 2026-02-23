@@ -1,0 +1,229 @@
+<mxfile host="65bd71144e">
+    <diagram id="i0Xq-YrPqt275V0xB1ov" name="Class Diagram">
+        <mxGraphModel dx="1671" dy="2323" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="&lt;b&gt;Class Diagram - Colocation Management System&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" vertex="1" parent="1">
+                    <mxGeometry x="400" y="20" width="400" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;&lt;enumeration&gt;&gt;&lt;br&gt;&lt;b&gt;UserStatus&lt;/b&gt;&lt;br&gt;&lt;br&gt;ACTIVE&lt;br&gt;BANNED&lt;br&gt;INACTIVE" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="80" width="140" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="&lt;&lt;enumeration&gt;&gt;&lt;br&gt;&lt;b&gt;MembershipStatus&lt;/b&gt;&lt;br&gt;&lt;br&gt;ACTIVE&lt;br&gt;LEFT&lt;br&gt;REMOVED" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="210" width="140" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="&lt;&lt;enumeration&gt;&gt;&lt;br&gt;&lt;b&gt;ColocationStatus&lt;/b&gt;&lt;br&gt;&lt;br&gt;ACTIVE&lt;br&gt;CANCELLED" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="340" width="140" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="&lt;&lt;enumeration&gt;&gt;&lt;br&gt;&lt;b&gt;InvitationStatus&lt;/b&gt;&lt;br&gt;&lt;br&gt;PENDING&lt;br&gt;ACCEPTED&lt;br&gt;DECLINED&lt;br&gt;EXPIRED" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="450" width="140" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="User" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="80" width="240" height="340" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="- id: bigint&lt;br&gt;- name: string&lt;br&gt;- email: string&lt;br&gt;- password: string&lt;br&gt;- email_verified_at: timestamp&lt;br&gt;- is_global_admin: boolean&lt;br&gt;- status: UserStatus&lt;br&gt;- reputation_score: int&lt;br&gt;- remember_token: string&lt;br&gt;- created_at: timestamp&lt;br&gt;- updated_at: timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="7">
+                    <mxGeometry y="26" width="240" height="154" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="7">
+                    <mxGeometry y="180" width="240" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="+ ownedColocations(): HasMany&amp;lt;Colocation&amp;gt;&lt;br&gt;+ memberships(): HasMany&amp;lt;Membership&amp;gt;&lt;br&gt;+ colocations(): BelongsToMany&amp;lt;Colocation&amp;gt;&lt;br&gt;+ activeColocation(): ?Colocation&lt;br&gt;+ invitations(): HasMany&amp;lt;Invitation&amp;gt;&lt;br&gt;+ paymentsMade(): HasMany&amp;lt;Payment&amp;gt;&lt;br&gt;+ paymentsReceived(): HasMany&amp;lt;Payment&amp;gt;&lt;br&gt;+ expensesPaid(): HasMany&amp;lt;Expense&amp;gt;&lt;br&gt;+ isBanned(): boolean&lt;br&gt;+ canJoinColocation(): boolean&lt;br&gt;+ updateReputation(int $delta): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="7">
+                    <mxGeometry y="188" width="240" height="152" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Colocation" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+                    <mxGeometry x="500" y="80" width="260" height="300" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="- id: bigint&lt;br&gt;- name: string&lt;br&gt;- description: text&lt;br&gt;- owner_id: bigint&lt;br&gt;- status: ColocationStatus&lt;br&gt;- cancelled_at: timestamp&lt;br&gt;- created_at: timestamp&lt;br&gt;- updated_at: timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="11">
+                    <mxGeometry y="26" width="260" height="114" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="11">
+                    <mxGeometry y="140" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="+ owner(): BelongsTo&amp;lt;User&amp;gt;&lt;br&gt;+ memberships(): HasMany&amp;lt;Membership&amp;gt;&lt;br&gt;+ members(): BelongsToMany&amp;lt;User&amp;gt;&lt;br&gt;+ expenses(): HasMany&amp;lt;Expense&amp;gt;&lt;br&gt;+ categories(): HasMany&amp;lt;Category&amp;gt;&lt;br&gt;+ invitations(): HasMany&amp;lt;Invitation&amp;gt;&lt;br&gt;+ activeMembers(): Collection&lt;br&gt;+ calculateBalances(): array&lt;br&gt;+ getSimplifiedDebts(): array&lt;br&gt;+ cancel(): void&lt;br&gt;+ isActive(): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="11">
+                    <mxGeometry y="148" width="260" height="152" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="ColocationMembership" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+                    <mxGeometry x="800" y="80" width="260" height="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="- id: bigint&lt;br&gt;- colocation_id: bigint&lt;br&gt;- user_id: bigint&lt;br&gt;- joined_at: timestamp&lt;br&gt;- left_at: timestamp&lt;br&gt;- status: MembershipStatus&lt;br&gt;- reputation_at_join: int&lt;br&gt;- created_at: timestamp&lt;br&gt;- updated_at: timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="15">
+                    <mxGeometry y="26" width="260" height="134" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="15">
+                    <mxGeometry y="160" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="+ colocation(): BelongsTo&amp;lt;Colocation&amp;gt;&lt;br&gt;+ user(): BelongsTo&amp;lt;User&amp;gt;&lt;br&gt;+ isActive(): boolean&lt;br&gt;+ hasLeft(): boolean&lt;br&gt;+ markAsLeft(): void&lt;br&gt;+ markAsRemoved(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="15">
+                    <mxGeometry y="168" width="260" height="92" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="Invitation" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="450" width="240" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="- id: bigint&lt;br&gt;- colocation_id: bigint&lt;br&gt;- email: string&lt;br&gt;- token: string&lt;br&gt;- status: InvitationStatus&lt;br&gt;- expires_at: timestamp&lt;br&gt;- accepted_by: bigint&lt;br&gt;- accepted_at: timestamp&lt;br&gt;- created_at: timestamp&lt;br&gt;- updated_at: timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="19">
+                    <mxGeometry y="26" width="240" height="154" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="19">
+                    <mxGeometry y="180" width="240" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="+ colocation(): BelongsTo&amp;lt;Colocation&amp;gt;&lt;br&gt;+ acceptedByUser(): BelongsTo&amp;lt;User&amp;gt;&lt;br&gt;+ isExpired(): boolean&lt;br&gt;+ accept(User $user): void&lt;br&gt;+ decline(): void&lt;br&gt;+ generateToken(): string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="19">
+                    <mxGeometry y="188" width="240" height="92" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Expense" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+                    <mxGeometry x="500" y="420" width="260" height="300" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="- id: bigint&lt;br&gt;- colocation_id: bigint&lt;br&gt;- payer_id: bigint&lt;br&gt;- category_id: bigint&lt;br&gt;- title: string&lt;br&gt;- amount: decimal(10,2)&lt;br&gt;- date: date&lt;br&gt;- description: text&lt;br&gt;- created_at: timestamp&lt;br&gt;- updated_at: timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="23">
+                    <mxGeometry y="26" width="260" height="164" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="23">
+                    <mxGeometry y="190" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="+ colocation(): BelongsTo&amp;lt;Colocation&amp;gt;&lt;br&gt;+ payer(): BelongsTo&amp;lt;User&amp;gt;&lt;br&gt;+ category(): BelongsTo&amp;lt;Category&amp;gt;&lt;br&gt;+ participants(): BelongsToMany&amp;lt;User&amp;gt;&lt;br&gt;+ payments(): HasMany&amp;lt;Payment&amp;gt;&lt;br&gt;+ getSplitAmount(): decimal&lt;br&gt;+ recalculateBalances(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="23">
+                    <mxGeometry y="198" width="260" height="102" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="Category" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+                    <mxGeometry x="1035" y="430" width="240" height="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="- id: bigint&lt;br&gt;- colocation_id: bigint&lt;br&gt;- name: string&lt;br&gt;- color: string&lt;br&gt;- icon: string&lt;br&gt;- is_default: boolean&lt;br&gt;- created_at: timestamp&lt;br&gt;- updated_at: timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="27">
+                    <mxGeometry y="26" width="240" height="124" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="27">
+                    <mxGeometry y="150" width="240" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="+ colocation(): BelongsTo&amp;lt;Colocation&amp;gt;&lt;br&gt;+ expenses(): HasMany&amp;lt;Expense&amp;gt;&lt;br&gt;+ getMonthlyStats(int $month, int $year): array" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="27">
+                    <mxGeometry y="158" width="240" height="62" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="Payment" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+                    <mxGeometry x="500" y="760" width="260" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="- id: bigint&lt;br&gt;- expense_id: bigint&lt;br&gt;- from_user_id: bigint&lt;br&gt;- to_user_id: bigint&lt;br&gt;- amount: decimal(10,2)&lt;br&gt;- paid_at: timestamp&lt;br&gt;- created_at: timestamp&lt;br&gt;- updated_at: timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="31">
+                    <mxGeometry y="26" width="260" height="124" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="31">
+                    <mxGeometry y="150" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="+ expense(): BelongsTo&amp;lt;Expense&amp;gt;&lt;br&gt;+ fromUser(): BelongsTo&amp;lt;User&amp;gt;&lt;br&gt;+ toUser(): BelongsTo&amp;lt;User&amp;gt;&lt;br&gt;+ markAsPaid(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="31">
+                    <mxGeometry y="158" width="260" height="82" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="Balance" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="760" width="240" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="- id: bigint&lt;br&gt;- colocation_id: bigint&lt;br&gt;- user_id: bigint&lt;br&gt;- total_paid: decimal(10,2)&lt;br&gt;- total_owed: decimal(10,2)&lt;br&gt;- net_balance: decimal(10,2)&lt;br&gt;- last_calculated_at: timestamp&lt;br&gt;- created_at: timestamp&lt;br&gt;- updated_at: timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="35">
+                    <mxGeometry y="26" width="240" height="144" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="35">
+                    <mxGeometry y="170" width="240" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="+ colocation(): BelongsTo&amp;lt;Colocation&amp;gt;&lt;br&gt;+ user(): BelongsTo&amp;lt;User&amp;gt;&lt;br&gt;+ recalculate(): void&lt;br&gt;+ getNetBalance(): decimal" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="35">
+                    <mxGeometry y="178" width="240" height="62" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="ReputationLog" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+                    <mxGeometry x="1050" y="830" width="240" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="- id: bigint&lt;br&gt;- user_id: bigint&lt;br&gt;- colocation_id: bigint&lt;br&gt;- change: int&lt;br&gt;- reason: string&lt;br&gt;- related_membership_id: bigint&lt;br&gt;- created_at: timestamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="39">
+                    <mxGeometry y="26" width="240" height="114" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="39">
+                    <mxGeometry y="140" width="240" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" value="+ user(): BelongsTo&amp;lt;User&amp;gt;&lt;br&gt;+ colocation(): BelongsTo&amp;lt;Colocation&amp;gt;&lt;br&gt;+ membership(): BelongsTo&amp;lt;Membership&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="39">
+                    <mxGeometry y="148" width="240" height="52" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="owns 0..*" style="endArrow=open;endFill=0;startArrow=diamondThin;startFill=0;html=1;rounded=0;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="7" target="11">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="480" y="182"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="44" value="has 0..*" style="endArrow=open;endFill=0;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="7" target="15">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="340" y="300"/>
+                            <mxPoint x="750" y="300"/>
+                            <mxPoint x="750" y="210"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="45" value="has 0..*" style="endArrow=open;endFill=0;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="11" target="15">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" value="contains 0..*" style="endArrow=open;endFill=0;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="11" target="23">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" value="has 0..*" style="endArrow=open;endFill=0;html=1;rounded=0;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="11" target="27">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="780" y="288"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="48" value="has 0..*" style="endArrow=open;endFill=0;html=1;rounded=0;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="11" target="19">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="480" y="288"/>
+                            <mxPoint x="480" y="590"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="49" value="has 0..*" style="endArrow=open;endFill=0;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="23" target="31">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="50" value="makes 0..*" style="endArrow=open;endFill=0;html=1;rounded=0;exitX=0;exitY=0.8;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="7" target="31">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="180" y="352"/>
+                            <mxPoint x="180" y="832"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="51" value="receives 0..*" style="endArrow=open;endFill=0;html=1;rounded=0;exitX=1;exitY=0.9;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="7" target="31">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="500" y="386"/>
+                            <mxPoint x="820" y="386"/>
+                            <mxPoint x="820" y="880"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="52" value="has 0..*" style="endArrow=open;endFill=0;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="7" target="35">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="340" y="760"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="53" value="tracks 0..*" style="endArrow=open;endFill=0;html=1;rounded=0;exitX=0;exitY=0.8;exitDx=0;exitDy=0;entryX=1;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="11" target="35">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="geometry">
+                            <mxPoint x="480" y="320"/>
+                            <mxPoint x="480" y="832"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="54" value="generates 0..*" style="endArrow=open;endFill=0;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="15" target="39">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="930" y="380"/>
+                            <mxPoint x="930" y="620"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="55" value="categorizes 0..*" style="endArrow=open;endFill=0;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" edge="1" parent="1" source="27" target="23">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="780" y="490"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="56" value="&lt;b&gt;Note:&lt;/b&gt;&lt;br&gt;First registered user&lt;br&gt;automatically becomes&lt;br&gt;Global Admin" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=5;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="600" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="57" value="&lt;b&gt;Note:&lt;/b&gt;&lt;br&gt;Denormalized table for&lt;br&gt;performance optimization&lt;br&gt;Recalculated on expense changes" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=5;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="1020" width="160" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="58" value="&lt;b&gt;Note:&lt;/b&gt;&lt;br&gt;Junction table with&lt;br&gt;additional attributes&lt;br&gt;(joined_at, left_at, status)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=5;" vertex="1" parent="1">
+                    <mxGeometry x="1170" y="-10" width="140" height="70" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
