@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('invitations', function (Blueprint $table) {
             $table->id();
+            $table->id('colocation_id')->constrained('colocations')->onDelete('cascade');
+            $table->string('email');
+            $table->string('token')->unique();
+            $table->enum('status', ['pending', 'accepted', 'declined'])->default('pending');
+            $table->timestamp('sent_at')->useCurrent();
+            $table->timestamp('responded_at')->nullable();
+            $table->timestamp('expired_at')->nullable();
             $table->timestamps();
         });
     }
