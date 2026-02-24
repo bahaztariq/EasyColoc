@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('is_admin')->default(false);
+            $table->integer('ReputationScore')->nullable()->default(0);
+            $table->enum('status', ['active','Banned'])->default('active');
+            $table->timestamp('banned_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

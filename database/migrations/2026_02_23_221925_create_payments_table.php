@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->id('expense_id')->constrained('expenses')->onDelete('cascade');
+            $table->id('payer_id')->constrained('users')->onDelete('cascade');
+            $table->id('payee_id')->constrained('users')->onDelete('cascade');
+            $table->decimal('amount', 10, 2);
+            $table->enum('status', ['pending', 'completed', 'failed'])->default('pending');
+            $table->timestamp('paid_at')->nullable();
             $table->timestamps();
         });
     }
