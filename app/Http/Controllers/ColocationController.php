@@ -13,7 +13,14 @@ class ColocationController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        $colocation = $user->colocation;
+
+        if ($colocation) {
+            $colocation->load(['members', 'expenses.payer', 'expenses.category', 'categories']);
+        }
+
+        return view('colocation', compact('colocation'));
     }
 
     /**
@@ -29,7 +36,14 @@ class ColocationController extends Controller
      */
     public function store(StoreColocationRequest $request)
     {
-        //
+        $colocation = Colocation::create([
+            'name' => $request->name,
+            'owner_id' => auth()->id(),
+        ]);
+
+        auth()->user()->update(['colocation_id' => $colocation->id]);
+
+        return redirect()->route('colocation.index')->with('success', 'Colocation created successfully!');
     }
 
     /**
@@ -59,8 +73,33 @@ class ColocationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Colocation $colocation)
     {
         //
+    }
+
+    /**
+     * Leave the current colocation.
+     */
+    public function leave()
+    {
+        $user = auth()->user();
+
+        if (!$user->colocation_id) {
+            return redirect()->route('colocation.index')->with('error', 'You are not in a colocation.');
+        }
+
+        $colocation = $user->colocation;
+
+        if ($colocation && $colocation->owner_id === $user->id) {
+            return redirect()->route('colocation.index')->with('error', 'As the owner, you cannot leave. Transfer ownership or delete the colocation.');
+        }
+
+        $user->update(['colocation_id' => null]);
+
+        return redirect()->route('colocation.index')->with('success', 'You have left the colocation.');
     }
 }
