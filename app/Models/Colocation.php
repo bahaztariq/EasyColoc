@@ -25,9 +25,7 @@ class Colocation extends Model
 
     public function members()
     {
-        return $this->belongsToMany(User::class, 'memberships')
-                    ->withPivot('role', 'joined_at', 'left_at')
-                    ->withTimestamps();
+        return $this->hasMany(User::class);
     }
 
     public function expenses()

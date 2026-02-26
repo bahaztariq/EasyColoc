@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'colocation_id',
     ];
 
     /**
@@ -55,21 +56,11 @@ class User extends Authenticatable
     }
 
     /**
-     * Colocations this user is a member of (via memberships pivot).
+     * The colocation this user belongs to.
      */
-    public function colocations()
+    public function colocation()
     {
-        return $this->belongsToMany(Colocation::class, 'memberships')
-                    ->withPivot('role', 'joined_at', 'left_at')
-                    ->withTimestamps();
-    }
-
-    /**
-     * Membership records for this user.
-     */
-    public function memberships()
-    {
-        return $this->hasMany(Membership::class);
+        return $this->belongsTo(Colocation::class);
     }
 
     /**

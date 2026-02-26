@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('colocations', function (Blueprint $table) {
+         Schema::create('colocations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
@@ -19,6 +19,10 @@ return new class extends Migration
             $table->enum('status', ['active', 'cancelled'])->default('active');
             $table->timestamp('cancelled_at')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('colocation_id')->references('id')->on('colocations')->onDelete('set null');
         });
     }
 
