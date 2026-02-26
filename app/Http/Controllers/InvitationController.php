@@ -2,65 +2,80 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreInvitationRequest;
-use App\Http\Requests\UpdateInvitationRequest;
+use App\Mail\invitationMail;
 use App\Models\Invitation;
+use App\Models\Colocation;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 
 class InvitationController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Send an invitation email.
      */
-    public function index()
+    public function send(Request $request, Colocation $colocation)
     {
-        //
+        $request->validate([
+            'email' => ['required', 'email'],
+        ]);
+
+        $invitation = Invitation::create([
+            'colocation_id' => $colocation->id,
+            'email' => $request->email,
+            'token' => Str::random(32),
+            'status' => 'pending',
+            'sent_at' => now(),
+            'expired_at' => now()->addHours(24),
+        ]);
+
+        $url = URL::temporarySignedRoute(
+            'invitation.accept',
+            now()->addHours(24),
+            ['token' => $invitation->token]
+        );
+
+        Mail::to($request->email)->send(new invitationMail($url, $colocation));
+
+        return redirect()->route('colocation.index')->with('success', 'Invitation sent successfully!');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Accept an invitation.
      */
-    public function create()
+    public function accept(Request $request, $token)
     {
-        //
-    }
+        $invitation = Invitation::where('token', $token)
+                        ->where('status', 'pending')
+                        ->first();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreInvitationRequest $request)
-    {
-        //
-    }
+        if (!$invitation) {
+            return redirect()->route('colocation.index')->with('error', 'Invitation not found or already used.');
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Invitation $invitation)
-    {
-        //
-    }
+        if ($invitation->isExpired()) {
+            return redirect()->route('colocation.index')->with('error', 'This invitation has expired.');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Invitation $invitation)
-    {
-        //
-    }
+        // Guest: redirect to register with the email pre-filled
+        if (auth()->guest()) {
+            session(['pending_invite_token' => $token]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateInvitationRequest $request, Invitation $invitation)
-    {
-        //
-    }
+            return redirect()->route('register', ['email' => $invitation->email])
+                ->with('status', 'Please register to join the colocation.');
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Invitation $invitation)
-    {
-        //
+        // Logged in: assign user to the colocation
+        $user = auth()->user();
+        $user->colocation_id = $invitation->colocation_id;
+        $user->save();
+
+        $invitation->update([
+            'status' => 'accepted',
+            'responded_at' => now(),
+        ]);
+
+        return redirect()->route('colocation.index')->with('success', 'You have joined the colocation!');
     }
 }
