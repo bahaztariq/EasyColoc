@@ -29,7 +29,14 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $colocation = auth()->user()->colocation;
+
+        Category::create([
+            'name' => $request->name,
+            'colocation_id' => $colocation->id,
+        ]);
+
+        return redirect()->route('colocation.index')->with('success', 'Category created successfully!');
     }
 
     /**
