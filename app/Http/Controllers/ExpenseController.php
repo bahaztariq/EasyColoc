@@ -29,7 +29,18 @@ class ExpenseController extends Controller
      */
     public function store(StoreExpenseRequest $request)
     {
-        //
+        $user = auth()->user();
+
+        Expense::create([
+            'title' => $request->title,
+            'amount' => $request->amount,
+            'category_id' => $request->category_id,
+            'expense_date' => $request->date,
+            'payerid' => $user->id,
+            'colocation_id' => $user->colocation_id,
+        ]);
+
+        return redirect()->route('colocation.index')->with('success', 'Expense added successfully!');
     }
 
     /**
