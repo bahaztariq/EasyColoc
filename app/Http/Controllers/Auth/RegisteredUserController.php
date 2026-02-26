@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invitation;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -45,6 +46,26 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Process pending invitation if the user registered via an invite link
+        if ($token = session()->pull('pending_invite_token')) {
+            $invitation = Invitation::where('token', $token)
+                ->where('status', 'pending')
+                ->first();
+
+            if ($invitation && !$invitation->isExpired()) {
+                $user->colocation_id = $invitation->colocation_id;
+                $user->save();
+
+                $invitation->update([
+                    'status' => 'accepted',
+                    'responded_at' => now(),
+                ]);
+
+                return redirect(route('colocation.index', absolute: false))
+                    ->with('success', 'Welcome! You have joined the colocation.');
+            }
+        }
+
+        return redirect(route('colocation.index', absolute: false));
     }
 }
