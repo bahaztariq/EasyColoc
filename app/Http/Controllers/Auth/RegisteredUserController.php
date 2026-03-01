@@ -40,6 +40,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'is_admin' => User::count() === 0, // First registered user becomes admin
         ]);
 
         event(new Registered($user));
@@ -53,8 +54,8 @@ class RegisteredUserController extends Controller
                 ->first();
 
             if ($invitation && !$invitation->isExpired()) {
-                $user->colocation_id = $invitation->colocation_id;
-                $user->save();
+                $user->colocations()->attach($invitation->colocation_id, ['role' => 'member']);
+                // $user->save(); // No longer need to save user as colocation_id is in pivot table
 
                 $invitation->update([
                     'status' => 'accepted',
