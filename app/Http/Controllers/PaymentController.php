@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 use App\Models\Payment;
+use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
@@ -22,6 +23,43 @@ class PaymentController extends Controller
     public function create()
     {
         //
+    }
+
+    public function settle(Request $request)
+    {
+        $request->validate([
+            'debtor_id' => 'required|exists:users,id',
+            'creditor_id' => 'required|exists:users,id',
+        ]);
+
+        $debtor = auth()->user();
+        $debtorId = $request->debtor_id;
+        $creditorId = $request->creditor_id;
+
+        // Security: Ensure the person clicking is the debtor
+        if ($debtor->id != $debtorId) {
+            return redirect()->back()->with('error', 'You are not authorized to settle this debt.');
+        }
+
+        // Mark all pending payments from the debtor to the creditor as completed
+        Payment::where('payer_id', $debtorId)
+            ->where('payee_id', $creditorId)
+            ->where('status', 'pending')
+            ->update([
+                'status' => 'completed',
+                'paid_at' => now(),
+            ]);
+
+        // Hand over offsetting logic remains (clearing any pending inverse debts)
+        Payment::where('payer_id', $creditorId)
+            ->where('payee_id', $debtorId)
+            ->where('status', 'pending')
+            ->update([
+                'status' => 'completed',
+                'paid_at' => now(),
+            ]);
+
+        return redirect()->back()->with('success', 'You have marked the debt as paid!');
     }
 
     /**
