@@ -27,7 +27,7 @@ class Invitation extends Model
 
     public function isExpired()
     {
-        return $this->expired_at && $this->expired_at->isPast();
+        return $this->expired_at < now();
     }
     public function status(){
         return $this->status;
