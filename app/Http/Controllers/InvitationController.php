@@ -68,8 +68,13 @@ class InvitationController extends Controller
 
         // Logged in: assign user to the colocation
         $user = auth()->user();
-        $user->colocation_id = $invitation->colocation_id;
-        $user->save();
+
+        // Soft-leave current colocation if any
+        if ($user->colocation) {
+            $user->colocations()->updateExistingPivot($user->colocation->id, ['left_at' => now()]);
+        }
+
+        $user->colocations()->syncWithoutDetaching([$invitation->colocation_id => ['role' => 'member']]);
 
         $invitation->update([
             'status' => 'accepted',
