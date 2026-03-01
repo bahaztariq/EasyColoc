@@ -46,7 +46,7 @@ class ExpenseController extends Controller
             'colocation_id' => $colocation->id,
         ]);
 
-        $members = $colocation->members;
+        $members = $colocation->currentMembers;
         $memberCount = $members->count();
 
         if ($memberCount > 1) {
