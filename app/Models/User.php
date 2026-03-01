@@ -22,6 +22,9 @@ class User extends Authenticatable
         'email',
         'password',
         'colocation_id',
+        'is_admin',
+        'status',
+        'banned_at',
     ];
 
     /**
@@ -56,13 +59,29 @@ class User extends Authenticatable
     }
 
     /**
-     * The colocation this user belongs to.
+     * The colocations this user belongs to.
      */
-    public function colocation()
+    public function colocations()
     {
-        return $this->belongsTo(Colocation::class);
+        return $this->belongsToMany(Colocation::class, 'memberships')->withPivot('role')->withTimestamps();
     }
 
+    /**
+     * Helper to get the first colocation (preserving existing logic for single dashboard)
+     */
+    public function getColocationAttribute()
+    {
+        return $this->colocations()->wherePivotNull('left_at')->first();
+    }
+
+    public function getColocationIdAttribute()
+    {
+        return $this->colocation?->id;
+    }
+
+    public function isCurrentMember(){
+        return $this->colocations()->wherePivotNull('left_at')->exists();
+    }
     /**
      * Expenses paid by this user.
      */
@@ -85,5 +104,16 @@ class User extends Authenticatable
     public function receivedPayments()
     {
         return $this->hasMany(Payment::class, 'payee_id');
+    }
+
+
+    public function isCreditor() : bool
+    {
+        return $this->receivedPayments()->where('status', 'pending')->sum('amount') > $this->paidPayments()->where('status', 'pending')->sum('amount');
+    }
+
+    public function isDebtor() : bool
+    {
+        return $this->paidPayments()->where('status', 'pending')->sum('amount') > $this->receivedPayments()->where('status', 'pending')->sum('amount');
     }
 }
