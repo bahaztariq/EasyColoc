@@ -17,7 +17,9 @@ class ColocationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->company() . ' Coloc',
+            'status' => 'active',
+            'owner_id' => \App\Models\User::factory(),
         ];
     }
 }
