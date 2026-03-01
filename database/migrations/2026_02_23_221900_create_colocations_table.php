@@ -20,10 +20,6 @@ return new class extends Migration
             $table->timestamp('cancelled_at')->nullable();
             $table->timestamps();
         });
-
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreign('colocation_id')->references('id')->on('colocations')->onDelete('set null');
-        });
     }
 
     /**
