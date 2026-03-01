@@ -8,7 +8,7 @@
                 </div>
                 <div>
                     <h2 class="text-xl font-bold text-gray-900 tracking-tight">{{ $colocation->name }}</h2>
-                    <p class="text-xs text-gray-400 mt-0.5">Shared living · {{ $colocation->members->count() }} members</p>
+                    <p class="text-xs text-gray-400 mt-0.5">Shared living · {{ $colocation->currentMembers->count() }} members</p>
                 </div>
             </div>
             @if($colocation->owner_id === auth()->id())
@@ -36,7 +36,7 @@
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="relative overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-5 shadow-md shadow-blue-200/50">
                     <div class="relative z-10">
-                        <p class="text-3xl font-extrabold text-white">{{ $colocation->members->count() }}</p>
+                        <p class="text-3xl font-extrabold text-white">{{ $colocation->currentMembers->count() }}</p>
                         <p class="text-blue-100 text-xs font-medium mt-1">Members</p>
                     </div>
                     <div class="absolute -right-3 -bottom-3 w-16 h-16 bg-white/10 rounded-full"></div>
@@ -69,8 +69,8 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {{-- Left Column --}}
                 <div class="lg:col-span-4 space-y-6">
-                    <x-members-section :members="$colocation->members" :colocation="$colocation" />
-                    <x-balances-section :members="$colocation->members" :expenses="$colocation->expenses" />
+                    <x-members-section :members="$colocation->currentMembers" :colocation="$colocation" />
+                    <x-balances-section :balances="$balances" />
                 </div>
 
                 {{-- Right Column --}}

@@ -46,10 +46,22 @@
                             <p class="text-xs text-gray-400">{{ $member->email }}</p>
                         </div>
                     </div>
-                    <span class="text-xs font-semibold px-2.5 py-1 rounded-lg
-                        {{ $isOwner ? 'bg-amber-50 text-amber-600' : 'bg-gray-50 text-gray-500' }}">
-                        {{ $isOwner ? 'Owner' : 'Member' }}
-                    </span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold px-2.5 py-1 rounded-lg
+                            {{ $isOwner ? 'bg-amber-50 text-amber-600' : 'bg-gray-50 text-gray-500' }}">
+                            {{ $isOwner ? 'Owner' : 'Member' }}
+                        </span>
+
+                        @if($colocation->owner_id === auth()->id() && !$isOwner)
+                        <form action="{{ route('colocation.kick', $member) }}" method="POST" onsubmit="return confirm('Are you sure you want to kick this member?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="p-1.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Kick member">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6"/></svg>
+                            </button>
+                        </form>
+                        @endif
+                    </div>
                 </div>
             @endforeach
         @endif
