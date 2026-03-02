@@ -74,5 +74,8 @@
                 </div>
             </div>
         </div>
+
+        {{-- Toast notifications --}}
+        <x-toast />
     </body>
 </html>

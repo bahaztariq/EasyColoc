@@ -62,12 +62,12 @@
         </div>
 
         {{-- Reputation Points --}}
-        <div class="flex items-center justify-between px-3 py-2.5 bg-amber-50 border border-amber-200 rounded-xl">
+        <div class="flex items-center justify-between px-3 py-2.5 bg-amber-100 rounded-xl">
             <div class="flex items-center gap-2">
-                <span class="text-lg">⭐</span>
-                <span class="text-xs font-semibold text-amber-700">Reputation Points</span>
+                
+                <span class="text-xs font-semibold text-black">Reputation Points</span>
             </div>
-            <span class="text-sm font-extrabold text-amber-600">{{ $user->ReputationScore ?? 0 }}</span>
+            <span class="text-sm font-extrabold text-black">{{ $user->ReputationScore ?? 0 }}</span>
         </div>
 
         {{-- Leave Colocation --}}
