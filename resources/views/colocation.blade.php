@@ -33,7 +33,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
             {{-- Stats Row --}}
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="relative overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-5 shadow-md shadow-blue-200/50">
                     <div class="relative z-10">
                         <p class="text-3xl font-extrabold text-white">{{ $colocation->currentMembers->count() }}</p>
@@ -55,14 +55,14 @@
                     </div>
                     <div class="absolute -right-3 -bottom-3 w-16 h-16 bg-white/10 rounded-full"></div>
                 </div>
-                <div class="relative overflow-hidden bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl p-5 shadow-md shadow-violet-200/50">
+                <!-- <div class="relative overflow-hidden bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl p-5 shadow-md shadow-violet-200/50">
                     <div class="relative z-10">
                         @php $share = $colocation->members->count() > 0 ? $colocation->expenses->sum('amount') / $colocation->members->count() : 0; @endphp
                         <p class="text-3xl font-extrabold text-white">{{ number_format($share, 0) }}</p>
                         <p class="text-violet-100 text-xs font-medium mt-1">Per Person</p>
                     </div>
                     <div class="absolute -right-3 -bottom-3 w-16 h-16 bg-white/10 rounded-full"></div>
-                </div>
+                </div> -->
             </div>
 
             {{-- Main Grid: Members + Balances | Expenses --}}

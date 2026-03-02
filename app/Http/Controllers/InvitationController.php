@@ -71,7 +71,7 @@ class InvitationController extends Controller
 
         // Soft-leave current colocation if any
         if ($user->colocation) {
-            $user->colocations()->updateExistingPivot($user->colocation->id, ['left_at' => now()]);
+            return redirect()->route('colocation.index')->with('error', 'You are already in a colocation.');
         }
 
         $user->colocations()->syncWithoutDetaching([$invitation->colocation_id => ['role' => 'member']]);
